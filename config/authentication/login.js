@@ -2,12 +2,12 @@ var crypto = require('crypto');
 var rand = require('csprng'); 
 var mongoose = require('mongoose'); 
 var gravatar = require('gravatar'); 
-var user = require('../models');  
+var user = require('../models').users;  
 
 exports.login = function(email,password,callback) {  
-
+	console.log(email);
 	user.find({email: email},function(err,users){  
-
+			
 		if(users.length != 0){  
 
 		var temp = users[0].salt; 

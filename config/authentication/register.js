@@ -1,7 +1,7 @@
 var crypto = require('crypto'); 
 var rand = require('csprng'); 
 var mongoose = require('mongoose'); 
-var user = require('../models');    
+var user = require('../models').users;    
 
 
 exports.register = function(email,password,callback) {  
@@ -16,11 +16,6 @@ if(!(x.indexOf("@")==x.length)){
 	var token = crypto.createHash('sha512').update(email +rand).digest("hex"); 
 	var hashed_password = crypto.createHash('sha512').update(newpass).digest("hex");  
 
-	console.log(token);
-	console.log(email);
-	console.log(hashed_password);
-	console.log(temp);
-
 	var newuser = new user({    
 		 token: token,   
 		 email: email,   
@@ -31,10 +26,7 @@ if(!(x.indexOf("@")==x.length)){
 	console.log(newuser);
 
 	user.find({email: email},function(err,users){  
-		console.log(err);
 		var len = users.length;  
-
-		console.log(len);
 
 		if(len == 0){   
 			newuser.save(function (err) {   

@@ -1,0 +1,3 @@
+[submodule "LyonRoute-ServerSide"]
+	path = LyonRoute-ServerSide
+	url = https://rstancioiu:europa2012@github.com/rstancioiu/LyonRoute-ServerSide

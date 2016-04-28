@@ -9,13 +9,15 @@ var uri = 'mongodb://lr:afkid@ds019478.mlab.com:19478/lyonroute';
 mongoose.connect(uri, options); 
 
 var Schema = mongoose.Schema;  
+var ObjectId = Schema.ObjectId;
 
 var userSchema = mongoose.Schema({    
      token : String,     
      email: String,  
      hashed_password: String,    
      salt : String,  
-     temp_str:String 
+     temp_str:String,
+	 id: ObjectId
 });  
 
 var offerSchema = mongoose.Schema({
@@ -28,10 +30,16 @@ var offerSchema = mongoose.Schema({
 	fullDuration : Number,
 	seatsAvailable : Number,
 	car : String,
-	details: String
+	details: String,
+	id: ObjectId
 });
 
 console.log(mongoose.connection.readyState);
 
-module.exports = mongoose.model('users', userSchema);
-module.exports = mongoose.model('offers',offerSchema);
+var users = mongoose.model('users', userSchema);
+var offers = mongoose.model('offers',offerSchema);
+
+module.exports = {
+	users : users,
+	offers: offers
+}

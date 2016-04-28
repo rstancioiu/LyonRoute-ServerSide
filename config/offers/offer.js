@@ -1,4 +1,4 @@
-var offer = require('../models');
+var offer = require('../models').offers;
 
 exports.make_offer = function(req, callback){
 
