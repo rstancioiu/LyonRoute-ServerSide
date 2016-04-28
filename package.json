@@ -1,7 +1,10 @@
 {
-  "name": "Server",
+  "name": "LyonRoute-ServerSide",
   "version": "0.0.1",
   "main": "app.js",
+  "scripts" : {
+	"start": "node app.js" 
+  },
   "dependencies": {
     "body-parser": "^1.15.0",
     "connect": "^3.4.1",
@@ -11,5 +14,15 @@
     "gravatar": "^1.5.2",
     "mongoose": "^4.4.13",
     "nodemailer": "^2.3.2"
-  }
+  },
+  "repository": {
+	"type": "git",
+	"url": "https://github.com/rstancioiu/LyonRoute-ServerSide.git"
+  },
+    "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
 }
