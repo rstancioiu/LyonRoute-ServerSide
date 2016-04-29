@@ -25,16 +25,24 @@ app.get('/', function(req, res) {
 
 // ---------- CONNECTION --------
 app.post('/login',function(req,res, next){        
-	
-	login.login(req, function (found) {           
+		console.log(req);
+	var email = req.body.email;             
+	var password = req.body.password;       
+	console.log(email);
+	login.login(email,password,function (found) {           
 	   console.log(found);             
 	   res.json(found);    
 	});    
 });     
 
-app.post('/register',function(req,res, next){    
-
-	register.register(req,function (found) {             
+app.post('/register',function(req,res, next){         
+	var email = req.body.email;             
+	var password = req.body.password;       
+	
+	console.log(email);
+	console.log(password);
+	
+	register.register(email,password,function (found) {             
 	   console.log(found);             
 	   res.json(found);    
 	});   

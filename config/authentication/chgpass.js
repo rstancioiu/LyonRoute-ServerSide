@@ -2,7 +2,7 @@ var crypto = require('crypto');
 var rand = require('csprng'); 
 var mongoose = require('mongoose'); 
 var nodemailer = require('nodemailer'); 
-var user = require('../models').users;  
+var user = require('../models');  
 
 var smtpTransport = nodemailer.createTransport("SMTP",{     
      auth: {         
