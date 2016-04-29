@@ -28,11 +28,13 @@ exports.update_offer = function(req, callback){
 
 exports.all_offers = function(req, callback){
 	offer.find({}, function(err, offers){
-		var userMap = {};
+		var userMap = [];
 		offers.forEach(function(offer){
-			userMap[offer._id] = offer;
+			userMap.push(offer);
 		});
-		callback(userMap);
+		console.log(userMap);
+		var map = JSON.parse(JSON.stringify(userMap));
+		callback({ "data": map});
 	});
 }
 

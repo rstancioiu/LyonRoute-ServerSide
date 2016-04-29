@@ -25,24 +25,16 @@ app.get('/', function(req, res) {
 
 // ---------- CONNECTION --------
 app.post('/login',function(req,res, next){        
-		console.log(req);
-	var email = req.body.email;             
-	var password = req.body.password;       
-	console.log(email);
-	login.login(email,password,function (found) {           
+
+	login.login(req, function (found) {           
 	   console.log(found);             
 	   res.json(found);    
 	});    
 });     
 
-app.post('/register',function(req,res, next){         
-	var email = req.body.email;             
-	var password = req.body.password;       
-	
-	console.log(email);
-	console.log(password);
-	
-	register.register(email,password,function (found) {             
+app.post('/register',function(req,res, next){    
+
+	register.register(req,function (found) {             
 	   console.log(found);             
 	   res.json(found);    
 	});   
@@ -101,7 +93,7 @@ app.post('/update_offer', function(req, res, next){
 app.get('/all_offers', function(req, res){
 	offer.all_offers(req, function(found){
 		console.log(found);
-		res.send(found);
+		res.json(found);
 	});
 });
 
