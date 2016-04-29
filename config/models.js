@@ -12,9 +12,13 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var userSchema = mongoose.Schema({    
-     token : String,     
+	 firstname : String,
+	 lastname : String,
+	 telnumber: String,
+	 address: String,
      email: String,  
-     hashed_password: String,    
+     hashed_password: String,  
+     token : String,     
      salt : String,  
      temp_str:String,
 	 id: ObjectId
@@ -33,8 +37,6 @@ var offerSchema = mongoose.Schema({
 	details: String,
 	id: ObjectId
 });
-
-console.log(mongoose.connection.readyState);
 
 var users = mongoose.model('users', userSchema);
 var offers = mongoose.model('offers',offerSchema);
