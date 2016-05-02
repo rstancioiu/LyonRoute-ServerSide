@@ -36,13 +36,15 @@ exports.update_offer = function(req, callback){
 	});
 }
 
-exports.all_offers = function(req, callback){
-	offer.find({}, function(err, offers){
+exports.all_offers = function(data, callback){
+	var arrival = data.arrival;
+	var departure = data.departure;
+	var query = {'ride.arrival.name': arrival, 'ride.departure.name': departure};
+	offer.find(query, function(err, offers){
 		var userMap = [];
 		offers.forEach(function(offer){
 			userMap.push(offer);
 		});
-		console.log(userMap);
 		var map = JSON.parse(JSON.stringify(userMap));
 		callback({ "data": map});
 	});
