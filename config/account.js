@@ -15,7 +15,7 @@ exports.update_account = function(data, callback){
 			{
 				'data': {'response' : "Update failed"}
 			});
-			callback({'response' : "Updated successfully"});
+			callback({'data':{'response' : "Updated successfully"}});
 		}
 	);
 }
