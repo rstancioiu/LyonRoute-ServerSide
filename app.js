@@ -25,7 +25,7 @@ app.get('/', function(req, res) {
 
 // ---------- CONNECTION --------
 app.post('/login',function(req,res, next){        
-
+	res.header("Access-Control-Allow-Origin", "*");
 	login.login(req, function (found) {           
 	   console.log(found);             
 	   res.json(found);    
@@ -33,14 +33,15 @@ app.post('/login',function(req,res, next){
 });     
 
 app.post('/register',function(req,res, next){    
-
+	res.header("Access-Control-Allow-Origin", "*");
 	register.register(req,function (found) {             
 	   console.log(found);             
 	   res.json(found);    
 	});   
 });     
 
-app.post('/api/chgpass', function(req, res, next) {       
+app.post('/api/chgpass', function(req, res, next) {    
+	res.header("Access-Control-Allow-Origin", "*");   
 	var id = req.body.id;                 
 	var opass = req.body.oldpass;         
 	var npass = req.body.newpass;       
@@ -52,7 +53,7 @@ app.post('/api/chgpass', function(req, res, next) {
 });     
 
 app.post('/api/resetpass', function(req, res, next) {         
-
+	res.header("Access-Control-Allow-Origin", "*");
 	var email = req.body.email;         
 
 	chgpass.respass_init(email,function(found){             
@@ -61,7 +62,8 @@ app.post('/api/resetpass', function(req, res, next) {
 	});     
 });     
 
-app.post('/api/resetpass/chg', function(req, res, next) {         
+app.post('/api/resetpass/chg', function(req, res, next) {   
+	res.header("Access-Control-Allow-Origin", "*");      
 	var email = req.body.email;         
 	var code = req.body.code;       
 	var npass = req.body.newpass;       
@@ -93,7 +95,6 @@ app.post('/update_offer', function(req, res, next){
 });
 
 app.get('/all_offers', function(req, res){
-	
 	offer.all_offers(req, function(found){
 		res.header("Access-Control-Allow-Origin", "*");
 		console.log(found);

@@ -13,7 +13,8 @@
     "express": "^4.13.4",
     "gravatar": "^1.5.2",
     "mongoose": "^4.4.13",
-    "nodemailer": "^2.3.2"
+    "nodemailer": "^2.3.2",
+	"google-distance": "^1.0.1"
 	
   },
   "repository": {
