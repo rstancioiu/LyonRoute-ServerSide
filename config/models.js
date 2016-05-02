@@ -16,24 +16,31 @@ var userSchema = mongoose.Schema({
 	 lastname : String,
 	 telnumber: String,
 	 address: String,
-     email: String,  
+     email: {type: String, required: true, unique: true},  
      hashed_password: String,  
      token : String,     
      salt : String,  
      temp_str:String,
 });  
 
+
 var offerSchema = mongoose.Schema({
-	driverName: String,
+	driverName: {type:String},
 	driverAge : Number,
-	driverRating : String,
-	fullDate: Date,
-	from: String,
-	to : String,
-	fullDuration : Number,
-	seatsAvailable : Number,
-	car : String,
-	details: String,
+	driverRating : {type:String},
+	driverCar : {type:String},
+	frequency : [{type:String}],
+	ride: {
+		waypoints: [{name: {type:String}, lat: {type:String}, lng: {type:String}}],
+		arrival: {name: {type:String}, lat: {type:String}, lng: {type:String}},
+		departure: {name: {type:String}, lat: {type:String}, lng: {type:String}},
+		date: Date,
+		duration : {type:String},
+		detour: {type:String},
+		seatsAvi: {type:String},
+		seats: {type: String},
+		passengers : [{name: {type: String}}] 
+	}
 });
 
 var users = mongoose.model('users', userSchema);

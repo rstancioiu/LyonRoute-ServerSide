@@ -107,6 +107,32 @@ app.post('/remove_offer', function(req, res){
 // ----------- USER ROUTES ---------
 
 
+// ----------- GOOGLE MAPS TESTS ---
+var distance = require('google-distance');
+
+app.get('/test', function(req,res){
+	distance.get(
+	{
+		origin: 'San Francisco, CA',
+		destination: 'San Diego, CA'
+	},
+	function(err, data){
+		if(err) return console.log(err);
+		console.log(data);
+	});
+	distance.get(
+	{
+		origin: '37.772886,-122.423771',
+  		destination: '37.871601,-122.269104'
+	},
+	function(err, data){
+		if(err) return console.log(err);
+		console.log(data);
+	});
+
+});
+
+
 // ----------- SERVER --------------
 
 var server = app.listen(port, function () {

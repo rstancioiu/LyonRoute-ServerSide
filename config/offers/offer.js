@@ -2,18 +2,28 @@ var offer = require('../models').offers;
 
 exports.make_offer = function(req, callback){
 
+	var data = req.body.data;
+
+
 	var newoffer = new offer({    
-		driverName: req.body.driverName,
-		driverAge : req.body.driverAge,
-		driverRating : req.body.driverRating,
-		fullDate: req.body.fullDate,
-		from: req.body.from,
-		to : req.body.to,
-		fullDuration : req.body.fullDuration,
-		seatsAvailable : req.body.seatsAvailable,
-		car : req.body.car,
-		details: req.body.details
+		driverName: data.driverName,
+		driverAge : data.driverAge,
+		driverRating : data.driverRating,
+		driverCar : data.driverCar,
+		frequency : data.frequency,
+		ride : {
+			waypoints : data.ride.waypoints,
+			arrival: data.ride.arrival,
+			departure: data.ride.departure,
+			date: data.ride.date,
+			duration: data.ride.duration,
+			detour: data.ride.detour,
+			seatsAvi: data.ride.seatsAvi,
+			seats: data.ride.seats,
+			passengers: data.ride.passengers
+		}
 	});  
+	console.log(newoffer);
 	newoffer.save(function(err){
 		callback({'response' : "Offer successfully registered", 'offer_id': newoffer._id});
 	});
