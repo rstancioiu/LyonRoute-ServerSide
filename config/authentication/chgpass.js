@@ -11,13 +11,13 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
           } 
 });   
 
-exports.cpass = function(id,opass,npass,callback) {  
+exports.cpass = function(email,opass,npass,callback) {  
 
 var temp1 =rand(160, 36); 
 var newpass1 = temp1 + npass; 
 var hashed_passwordn = crypto.createHash('sha512').update(newpass1).digest("hex");  
 
-user.find({token: id},function(err,users){  
+user.find({email: email},function(err,users){  
 
 if(users.length != 0){  
 
@@ -28,21 +28,21 @@ var hashed_password = crypto.createHash('sha512').update(newpass).digest("hex");
 if(hash_db == hashed_password){ 
 if (npass.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/) && npass.length > 4 && npass.match(/[0-9]/) && npass.match(/.[!,@,#,$,%,^,&,*,?,_,~]/)) {  
 
-user.findOne({ token: id }, function (err, doc){   
+user.findOne({ email: email }, function (err, doc){   
      doc.hashed_password = hashed_passwordn;   
      doc.salt = temp1;   
      doc.save();  
 
-callback({'response':"Password Sucessfully Changed",'res':true});  
+     callback({'data': {'response':"Password Sucessfully Changed",'res':true}});  
 }); 
 }else{  
 
-callback({'response':"New Password is Weak. Try a Strong Password !",'res':false});  
+     callback({'data': {'response':"New Password is Weak. Try a Strong Password !",'res':false}});  
 
 } 
 }else{  
 
-callback({'response':"Passwords do not match. Try Again !",'res':false});  
+     callback({'data': {'response':"Passwords do not match. Try Again !",'res':false}});  
 
 } 
 }else{  

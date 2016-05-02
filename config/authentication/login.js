@@ -5,8 +5,8 @@ var gravatar = require('gravatar');
 var user = require('../models').users;  
 
 exports.login = function(req, callback) {  
-	var email = req.body.email;             
-	var password = req.body.password;       
+	var email = req.body.data.email;             
+	var password = req.body.data.password;       
 	console.log(email);
 	console.log(password);
 	user.find({email: email},function(err,users){  

@@ -5,12 +5,12 @@ var user = require('../models').users;
 
 
 exports.register = function(req,callback) {  
-	var firstname = req.body.firstname;
-	var lastname = req.body.lastname;
-	var telnumber = req.body.telnumber;
-	var address = req.body.address;
-	var email = req.body.email;             
-	var password = req.body.password; 
+	var firstname = req.body.data.firstname;
+	var lastname = req.body.data.lastname;
+	var telnumber = req.body.data.telnumber;
+	var address = req.body.data.address;
+	var email = req.body.data.email;             
+	var password = req.body.data.password; 
 
 	console.log(email);
 	var x = email; 

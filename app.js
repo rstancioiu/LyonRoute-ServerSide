@@ -16,6 +16,7 @@ var chgpass = require('./config/authentication/chgpass');
 var register = require('./config/authentication/register'); 
 var login = require('./config/authentication/login');   
 var offer = require('./config/offers/offer');
+var account = require('./config/account');
 
 var router = express.Router();
 
@@ -24,7 +25,7 @@ app.get('/', function(req, res) {
 });   
 
 // ---------- CONNECTION --------
-app.post('/login',function(req,res, next){        
+app.post('/login',function(req,res, next){       
 	res.header("Access-Control-Allow-Origin", "*");
 	login.login(req, function (found) {           
 	   console.log(found);             
@@ -41,12 +42,12 @@ app.post('/register',function(req,res, next){
 });     
 
 app.post('/api/chgpass', function(req, res, next) {       
-	var id = req.body.id;                 
-	var opass = req.body.oldpass;         
-	var npass = req.body.newpass;   
+	var email = req.body.data.email;                 
+	var opass = req.body.data.oldpass;         
+	var npass = req.body.data.newpass;   
 	res.header("Access-Control-Allow-Origin", "*");    
 
-	chgpass.cpass(id,opass,npass,function(found){           
+	chgpass.cpass(email,opass,npass,function(found){           
 	   console.log(found);             
 	   res.json(found);    
 	});     
@@ -75,6 +76,15 @@ res.header("Access-Control-Allow-Origin", "*");
 	});     
 });
 
+app.post('/update_account', function(req,res,next){
+	res.header("Access-Control-Allow-Origin","*");
+	var data = req.body.data;
+	account.update_account(data, function(found){
+		res.json(found);
+	});
+});
+
+
 // ----------- OFFER ROUTES -----------
 
 app.post('/make_offer', function(req, res, next){ 
@@ -93,7 +103,7 @@ app.post('/update_offer', function(req, res, next){
 	});
 });
 
-app.post('/remove_offer', function(req, res){
+app.post('/remove_offer', function(req, res, next){
 	res.header("Access-Control-Allow-Origin", "*");
 	offer.remove_offer(req, function(found){
 		console.log(found);
