@@ -25,14 +25,14 @@ exports.make_offer = function(req, callback){
 	});  
 	console.log(newoffer);
 	newoffer.save(function(err){
-		callback({'response' : "Offer successfully registered", 'offer_id': newoffer._id});
+		callback({"data" : {'response' : "Offer successfully registered", 'offer_id': newoffer._id}});
 	});
 }
 
 exports.update_offer = function(req, callback){
 	var query = {'_id': req.body._id};
 	offer.update(query, {$set: {details: req.body.details}}, {upsert: true}, function(err,doc){
-		callback({'response' : "Updated successfully"});
+		callback({"data": {'response' : "Updated successfully"}});
 	});
 }
 
@@ -52,7 +52,7 @@ exports.all_offers = function(data, callback){
 
 exports.remove_offer = function(req, callback){
 	offer.remove({_id : req.body._id} , function(err, removed){
-		if(err) callback({'response' : "The operation failed"});
-		else callback({'response': "Operation successfull"});
+		if(err) callback({"data" : {'response' : "The operation failed"}});
+		else callback({"data": {'response': "Operation successfull"}});
 	});
 }
