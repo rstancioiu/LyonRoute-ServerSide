@@ -1,4 +1,5 @@
 var offer = require('../models').offers;
+var user  = require('../models').users;
 
 exports.make_offer = function(req, callback){
 
@@ -36,6 +37,23 @@ exports.update_offer = function(req, callback){
 	});
 }
 
+exports.confirm_offer = function(data, callback){
+	var query1 = {'_id': data._id};
+	var query2 = {'email': data.email};
+	offer.findOne(query1, function(err, offers){
+		if(err) callback({"data": {'response': "Update failed"}});
+		user.findOne(query2, function(err, users){
+			if(err) callback({"data": {'response': "Update failed"}});
+			var s = users.firstname+ " "+ users.lastname;
+			console.log(s);
+			offers.ride.passengers.push({'name': s });
+			offers.ride.seatsAvi = offers.ride.seatsAvi - 1;
+			offers.save();
+			callback({"data": {'response': "Updated successfully"}});
+		});
+	});
+}
+
 exports.all_offers = function(data, callback){
 	var arrival = data.arrival;
 	var departure = data.departure;
@@ -43,7 +61,9 @@ exports.all_offers = function(data, callback){
 	offer.find(query, function(err, offers){
 		var userMap = [];
 		offers.forEach(function(offer){
-			userMap.push(offer);
+			if(offer.ride.seatsAvi>0){
+				userMap.push(offer);
+			}
 		});
 		var map = JSON.parse(JSON.stringify(userMap));
 		callback({ "data": map});

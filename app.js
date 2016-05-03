@@ -111,6 +111,14 @@ app.post('/remove_offer', function(req, res, next){
 	});
 });
 
+app.post('/confirm_offer', function(req, res, next){
+	res.header("Access-Control-Allow-Origin", "*");
+	offer.confirm_offer(req.body.data, function(found){
+		console.log(found);
+		res.json(found);
+	})
+});
+
 app.get('/all_offers/:departure/:arrival', function(req,res){
 	res.header("Access-Control-Allow-Origin", "*");
 	var data = {
