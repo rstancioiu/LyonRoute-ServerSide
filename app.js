@@ -137,6 +137,20 @@ app.get('/all_offers/:departure/:arrival', function(req,res){
 	});
 });
 
+app.get('/my_offers/:email', function(req, res){
+	var email = req.params.email;
+	offer.my_offers(email, function(found){
+		res.json(found);
+	});
+});
+
+app.get('/my_inscriptions/:email', function(req, res){
+	var email = req.params.email;
+	offer.my_inscriptions(email, function(found){
+		res.json(found);
+	})
+});
+
 
 // ----------- USER ROUTES ---------
 

@@ -21,6 +21,7 @@ var userSchema = mongoose.Schema({
      token : String,     
      salt : String,  
      temp_str:String,
+     offers: [ObjectId]
 });  
 
 
