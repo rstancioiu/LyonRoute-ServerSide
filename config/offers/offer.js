@@ -75,7 +75,7 @@ exports.my_inscriptions = function(email, callback){
 				})
 			})
 		});
-		return finalPromise;
+		return userMap;
 	}).then(function(response){
 		var map = JSON.parse(JSON.stringify(response));
 		callback({ "data": map});
