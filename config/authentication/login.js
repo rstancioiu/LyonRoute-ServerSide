@@ -22,18 +22,18 @@ exports.login = function(req, callback) {
 			
 			if(hash_db == hashed_password){  
 
-				callback({'response':"Login Sucess",'res':true,'token':id,'grav':grav_url, 
+				callback({"data": {'response':"Login Sucess",'res':true,'token':id,'grav':grav_url, 
 					firstname: users[0].firstname, lastname: users[0].lastname, telnumber: users[0].telnumber,
-					address: users[0].address, email: users[0].email});  
+				address: users[0].address, email: users[0].email}});  
 
 			}else{  
 
-				callback({'response':"Invalid Password",'res':false});  
+				callback({"data": {'response':"Invalid Password",'res':false}});  
 
 			} 
 		}else {  
 
-				callback({'response':"User not exist",'res':false});  
+				callback({"data":{'response':"User not exist",'res':false}});  
 		} 
 	}); 
 }	 

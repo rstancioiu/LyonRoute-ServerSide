@@ -41,21 +41,21 @@ exports.register = function(req,callback) {
 				if(len == 0){   
 					newuser.save(function (err) {   
 
-					callback({'res': 0});  // Succesfully registered
+					callback({"data":{'res': 0, 'response': "Succesfully registered"}});  // Succesfully registered
 
 				}); 
 				}else{    
 
-					callback({'res': 1});  // There is already an user with this email
+					callback({"data":{'res': 1}});  // There is already an user with this email
 				}
 			});
 		}else{      
 
-			callback({'res': 2});  // The password is invalid
+			callback({"data":{'res': 2}});  // The password is invalid
 
 		}
 	}else{    
 
-		callback({'res': 3});  // Invalid e-mail address
+		callback({"data":{'res': 3}});  // Invalid e-mail address
 	} 
 } 
