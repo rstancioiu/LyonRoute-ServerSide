@@ -58,9 +58,12 @@ exports.confirm_offer = function(data, callback){
 exports.all_offers = function(data, callback){
 	var arrival = data.arrival;
 	var departure = data.departure;
-	var query = {'ride.arrival.name': arrival, 'ride.departure.name': departure};
+
+	var query = { 
+		'ride.departure.name' :  {$regex : '.*' + departure + '.*', $options: 'i'} , 'ride.arrival.name' :  {$regex : '.*' + arrival + '.*', $options: 'i'}};
 	offer.find(query, function(err, offers){
 		var userMap = [];
+		console.log(offers);
 		offers.forEach(function(offer){
 			if(offer.ride.seatsAvi>0){
 				userMap.push(offer);
