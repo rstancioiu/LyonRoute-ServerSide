@@ -7,6 +7,7 @@ exports.make_offer = function(req, callback){
 
 
 	var newoffer = new offer({    
+		driverEmail: data.driverEmail,
 		driverName: data.driverName,
 		driverAge : data.driverAge,
 		driverRating : data.driverRating,
@@ -46,7 +47,7 @@ exports.confirm_offer = function(data, callback){
 			if(err) callback({"data": {'response': "Update failed"}});
 			var s = users.firstname+ " "+ users.lastname;
 			console.log(s);
-			offers.ride.passengers.push({'name': s });
+			offers.ride.passengers.push({'name': s, 'email': data.email});
 			offers.ride.seatsAvi = offers.ride.seatsAvi - 1;
 			offers.save();
 			callback({"data": {'response': "Updated successfully"}});

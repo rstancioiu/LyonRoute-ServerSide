@@ -25,6 +25,7 @@ var userSchema = mongoose.Schema({
 
 
 var offerSchema = mongoose.Schema({
+	driverEmail: {type: String},
 	driverName: {type:String},
 	driverAge : Number,
 	driverRating : {type:String},
@@ -39,7 +40,7 @@ var offerSchema = mongoose.Schema({
 		detour: {type:String},
 		seatsAvi: {type:String},
 		seats: {type: String},
-		passengers : [{name: {type: String}}] 
+		passengers : [{name: {type: String}, email : {type: String}}] 
 	}
 });
 
