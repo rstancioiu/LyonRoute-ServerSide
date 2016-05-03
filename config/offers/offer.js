@@ -59,10 +59,8 @@ exports.my_inscriptions = function(email, callback){
 	var userMap = [];
 	counter = 0;
 	user.find({"email":email}).then(function(response){
-		console.log(response[0]);
 		return response[0].offers;
 	}).then(function(response){
-		console.log(response);
 		var finalPromise = new Promise(function(resolve, reject){
 			response.forEach(function(element){
 				offer.findOne({"_id":element}, function(err, new_offer){
@@ -75,9 +73,9 @@ exports.my_inscriptions = function(email, callback){
 				})
 			})
 		});
-		return userMap;
+		return finalPromise;
 	}).then(function(response){
-		var map = JSON.parse(JSON.stringify(response));
+		var map = JSON.parse(JSON.stringify(userMap));
 		callback({ "data": map});
 	});
 }
@@ -105,14 +103,19 @@ exports.all_offers = function(data, callback){
 	var arrival = data.arrival;
 	var departure = data.departure;
 	var query = {'ride.arrival.name': arrival, 'ride.departure.name': departure};
-	offer.find(query, function(err, offers){
-		var userMap = [];
-		offers.forEach(function(offer){
-			if(offer.ride.seatsAvi>0){
-				userMap.push(offer);
-			}
-		});
-		var map = JSON.parse(JSON.stringify(userMap));
+	var userMap = [];
+	offer.find(query).then(function(response){
+		console.log(response);
+		return response;
+	}).then(function(response){
+			response.forEach(function(element){
+				if(element.ride.seatsAvi>0)
+					userMap.push(element);
+			})
+		return userMap;
+	}).then(function(response){
+		console.log(response);
+		var map = JSON.parse(JSON.stringify(response));
 		callback({ "data": map});
 	});
 }
